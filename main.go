@@ -9,6 +9,11 @@ import (
 )
 
 func main() {
+	const (
+		OpCodeMask = 0xFC
+		OpCodeMov  = 0x88
+	)
+
 	file := flag.String("file", "listing_0037_single_register_mov", "name of the file inside /listings directory")
 	flag.Parse()
 
@@ -29,8 +34,8 @@ func main() {
 			log.Fatal(err)
 		}
 
-		if n < 2 {
-			break
+		if b[0]&OpCodeMask == OpCodeMov {
+			fmt.Println("Instruction is a MOV")
 		}
 
 		fmt.Printf("%#x\n", string(b[:n]))
