@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	file := flag.String("file", "listing_0038_many_register_mov", "name of the file inside /listings directory")
+	file := flag.String("file", "listing_0037_single_register_mov", "name of the file inside /listings directory")
 	flag.Parse()
 
 	f, err := os.Open("./listings/" + *file)
