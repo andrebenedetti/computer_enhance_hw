@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io"
 	"log"
@@ -8,7 +9,10 @@ import (
 )
 
 func main() {
-	f, err := os.Open("./listing_0038_many_register_mov")
+	file := flag.String("file", "listing_0038_many_register_mov", "name of the file inside /listings directory")
+	flag.Parse()
+
+	f, err := os.Open("./listings/" + *file)
 	if err != nil {
 		log.Fatal(err)
 	}
