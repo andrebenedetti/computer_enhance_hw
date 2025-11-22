@@ -14,6 +14,10 @@ func main() {
 		OpCodeMov  = 0x88
 	)
 
+	var instructionNames = map[byte]string{
+		OpCodeMov: "MOV",
+	}
+
 	file := flag.String("file", "listing_0037_single_register_mov", "name of the file inside /listings directory")
 	flag.Parse()
 
@@ -25,7 +29,7 @@ func main() {
 
 	b := make([]byte, 2)
 	for {
-		n, err := f.Read(b)
+		_, err := f.Read(b)
 
 		if err != nil {
 			if err == io.EOF {
@@ -34,10 +38,10 @@ func main() {
 			log.Fatal(err)
 		}
 
-		if b[0]&OpCodeMask == OpCodeMov {
-			fmt.Println("Instruction is a MOV")
+		if name, ok := instructionNames[b[0]&OpCodeMask]; ok {
+			fmt.Println(name)
+		} else {
+			fmt.Println("Unsupported opcode")
 		}
-
-		fmt.Printf("%#x\n", string(b[:n]))
 	}
 }
