@@ -23,8 +23,8 @@ func main() {
 	}
 	defer f.Close()
 
+	b := make([]byte, 2)
 	for {
-		b := make([]byte, 2)
 		n, err := f.Read(b)
 
 		if err != nil {
